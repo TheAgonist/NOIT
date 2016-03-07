@@ -14,7 +14,7 @@ module.exports = service;
 function getAll(_id){
     var deferred = Q.defer();
 
-    recordsDB.find(_id,function (err, record) {
+    recordsDB.find({},{sort : { upvote : -1 } },function (err, record) {
         if (err) deferred.reject(err);
         if (record) {
             // return user (without hashed password)
