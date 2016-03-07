@@ -25,12 +25,21 @@
             var newLine = document.createElement("BR");
             var upvote = document.createElement("BUTTON");
             upvote.id = "upvoteButton";
-            upvote.className = "btn btn-primary";
+            upvote.onclick = function() {
+                                            upvoteFunc(record);
+                                        };
+            upvote.innerHTML = "UPVOTE";
             var showRecords = document.getElementById("showRecords");
             audioDiv.appendChild(audio);
             audioDiv.appendChild(upvote);
             showRecords.appendChild(audioDiv);
             showRecords.appendChild(newLine);
+        }
+
+
+        function upvoteFunc(record){
+            //console.log(record);
+            PlayService.upvote(record);
         }
     }
 })();

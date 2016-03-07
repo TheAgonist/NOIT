@@ -8,6 +8,7 @@ var _ = require('lodash');
 
 var service = {};
 service.getAll = getAll;
+service.update = update;
 module.exports = service;
 
 function getAll(_id){
@@ -23,6 +24,24 @@ function getAll(_id){
             deferred.resolve();
         }
     });
+
+    return deferred.promise;
+}
+
+function update(_id, recordParam) {
+    var deferred = Q.defer();
+        var set = {
+            upvote: Number(recordParam.upvote)+1,
+        };
+        //console.log(_id);
+        recordsDB.findAndModify(
+            { _id: _id },
+            { $set: set },
+            function (err, doc) {
+                if (err) deferred.reject(err);
+
+                deferred.resolve();
+            });
 
     return deferred.promise;
 }

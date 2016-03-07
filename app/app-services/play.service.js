@@ -8,15 +8,16 @@
     function Service($http, $q) {
         var service = {};
         service.getAll = getAll;
-        service.uploadMusic = uploadMusic;
+        service.upvote = upvote;
         return service;
 
         function getAll() {
             return $http.get('/api/play/all').then(handleSuccess, handleError);
         }
 
-        function uploadMusic(){
-            console.log("service");
+        function upvote(record){
+            //console.log(record);
+            return $http.put('/api/play/' + record._id,record).then(handleSuccess, handleError);
         }
 
         function handleSuccess(res) {
