@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router'], ['angularFileUpload'])
+        .module('app', ['ui.router']/*, ['angularFileUpload']*/)
         .config(config)
         .run(run);
 
