@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router']/*, ['angularFileUpload']*/)
+        .module('app', ['ui.router'])
         .config(config)
         .run(run);
 
@@ -42,7 +42,7 @@
             .state('upload', {
                 url: '/upload',
                 templateUrl: 'upload/index.html',
-                controller: 'MainController',
+                controller: 'Upload.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'upload' }
             });
@@ -57,7 +57,6 @@
             $rootScope.activeTab = toState.data.activeTab;
         });
     }
-    //var app = angular.module('app', ['angularFileUpload']);
     // manually bootstrap angular after the JWT token is retrieved from the server
     $(function () {
         // get JWT token from server

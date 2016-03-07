@@ -2,6 +2,11 @@
     padding: 20px 0;
 }
 
+#upvoteButton{
+	height: 30px;
+	width: 50px;
+}
+
 .flash-message {
     margin-top: 20px;
 }

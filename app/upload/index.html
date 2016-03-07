@@ -1,9 +1,9 @@
-<div ng-app=“myApp” ng-controller=“MainController”>
+<div app=“app” controller=“Upload.IndexController”>
  
  Upload File:
  
  <form>
-   <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'">
-   <input type="submit" ng-click="uploadFile()" >
+   <input type="file" file-select="fileSelected($files)" accept="'image/*'">
+   <input type="submit" click="uploadFile()" >
  </form>
 </div>

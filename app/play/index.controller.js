@@ -15,6 +15,7 @@
         }
 
         function createAudioTag(record){
+            var audioDiv = document.createElement("DIV");
             var audio = document.createElement("AUDIO");
             audio.controls = true;
             var source = document.createElement("SOURCE");
@@ -22,8 +23,13 @@
             source.type = "audio/mpeg"
             audio.appendChild(source);
             var newLine = document.createElement("BR");
+            var upvote = document.createElement("BUTTON");
+            upvote.id = "upvoteButton";
+            upvote.className = "btn btn-primary";
             var showRecords = document.getElementById("showRecords");
-            showRecords.appendChild(audio);
+            audioDiv.appendChild(audio);
+            audioDiv.appendChild(upvote);
+            showRecords.appendChild(audioDiv);
             showRecords.appendChild(newLine);
         }
     }
