@@ -39,13 +39,13 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'sheetMusic' }
             })
-            /*.state('upload', {
+            .state('upload', {
                 url: '/upload',
-                templateUrl: 'file-upload/client/index.html',
-                controller: 'MyCtrl',
+                templateUrl: 'uploadFile/index.html',
+                controller: 'Upload.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'upload' }
-            })*/;
+            });
     }
     
     

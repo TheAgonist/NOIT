@@ -16,7 +16,7 @@
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
             <li ng-class="{active: activeTab === 'play'}"><a ui-sref="play">Play</a></li>
             <li ng-class="{active: activeTab === 'sheetMusic'}"><a ui-sref="sheetMusic">Sheet Music</a></li>
-           <!-- <li ng-class="{active: activeTab === 'upload'}"><a ui-sref="upload">Upload</a></li>-->
+            <li ng-class="{active: activeTab === 'upload'}"><a ui-sref="upload">Upload</a></li>
             <li><a href="/login" target="_self">Logout</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
@@ -53,6 +53,6 @@
     <script src="account/index.controller.js"></script>
     <script src="play/index.controller.js"></script>
     <script src="sheetMusic/index.controller.js"></script>
-    <!--<script src="file-upload/client/main.js"></script>-->
+    <script src="uploadFile/index.controller.js"></script>
 </body>
 </html>
