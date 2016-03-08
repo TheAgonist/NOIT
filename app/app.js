@@ -39,15 +39,16 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'sheetMusic' }
             })
-            .state('upload', {
+            /*.state('upload', {
                 url: '/upload',
-                templateUrl: 'upload/index.html',
-                controller: 'Upload.IndexController',
+                templateUrl: 'file-upload/client/index.html',
+                controller: 'MyCtrl',
                 controllerAs: 'vm',
                 data: { activeTab: 'upload' }
-            });
+            })*/;
     }
-
+    
+    
     function run($http, $rootScope, $window) {
         // add JWT token as default auth header
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
