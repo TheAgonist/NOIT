@@ -3,8 +3,10 @@
     angular
         .module('app')
         .controller('sheetMusic.IndexController', Controller);
-    function Controller(sheetMusicService) {
-        initController();
+   
+	function Controller(sheetMusicService) {
+	    
+ initController();
         function initController(){
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
@@ -49,51 +51,62 @@
           // Render voice
           voice.draw(ctx, stave);
           voice2.draw(ctx, stave);
-                //readMidi();
+          readMidi();
         }
 
         function readMidi(){
-                    // Your variable with a ArrayBuffer instance containing your MIDI file 
-          var anyBuffer = "/Metallica-FadeToBlack.mid";
-           
-          // Creating the MIDIFile instance 
-          var midiFile = new MIDIFile(anyBuffer);
-           
-          // Reading headers 
-          midiFile.header.getFormat(); // 0, 1 or 2 
-          midiFile.header.getTracksCount(); // n 
-          // Time division 
-          if(midiFile.header.getTimeDivision() === MIDIFileHeader.TICKS_PER_BEAT) {
-            midiFile.header.getTicksPerBit();
-          } else {
-            midiFile.header.getSMPTEFrames();
-            midiFile.header.getTicksPerFrame();
-          }
-           
-          // MIDI events retriever 
-          var events = midiFile.getMidiEvents();
-          events[0].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34) 
-          events[0].playTime; // time in ms at wich the event must be played 
-          events[0].param1; // first parameter 
-          events[0].param2; // second one 
-           
-          // Lyrics retriever 
-          var lyrics = midiFile.getLyrics();
-          lyrics[0].playTime; // Time at wich the text must be displayed 
-          lyrics[0].text; // The text content to be displayed 
-           
-          // Reading whole track events and filtering them yourself 
-          var trackEventsChunk = midiFile.getTrackEvents(0);
-          var events = new MIDIFile.createParser(trackEventsChunk);
-          var event;
-           
-          while(event=events.next()) {
-            // Printing meta events containing text only 
-            if(event.type === MIDIFile.EVENT_META && event.text) {
-              console.log('Text meta: '+event.text);
-            }
-          }
-        }
+                // Your variable with a ArrayBuffer instance containing your MIDI file 
+		//fs = require('fs');
+		fs.readFile('/Metallica-FadeToBlack.mid', 'base64', function (err,data) {
+		  if (err) {
+		    return console.log(err);
+		  }
+		  console.log(data);
+		});
+
+	
+
+		  var anyBuffer = reader.readAsArrayBuffer("/Metallica-FadeToBlack.mid");
+		   
+		  // Creating the MIDIFile instance 
+	console.log(anyBuffer);
+		  var midiFile = new MIDIFile(anyBuffer);
+		  
+		  // Reading headers 
+		  midiFile.header.getFormat(); // 0, 1 or 2 
+		  midiFile.header.getTracksCount(); // n 
+		  // Time division 
+		  if(midiFile.header.getTimeDivision() === MIDIFileHeader.TICKS_PER_BEAT) {
+		    midiFile.header.getTicksPerBit();
+		  } else {
+		    midiFile.header.getSMPTEFrames();
+		    midiFile.header.getTicksPerFrame();
+		  }
+		   
+		  // MIDI events retriever 
+		  var events = midiFile.getMidiEvents();
+		  events[0].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34) 
+		  events[0].playTime; // time in ms at wich the event must be played 
+		  events[0].param1; // first parameter 
+		  events[0].param2; // second one 
+		   
+		  // Lyrics retriever 
+		  var lyrics = midiFile.getLyrics();
+		  lyrics[0].playTime; // Time at wich the text must be displayed 
+		  lyrics[0].text; // The text content to be displayed 
+		   
+		  // Reading whole track events and filtering them yourself 
+		  var trackEventsChunk = midiFile.getTrackEvents(0);
+		  var events = new MIDIFile.createParser(trackEventsChunk);
+		  var event;
+		   
+		  while(event=events.next()) {
+		    // Printing meta events containing text only 
+		    if(event.type === MIDIFile.EVENT_META && event.text) {
+		      console.log('Text meta: '+event.text);
+		    }
+		  }
+		}
 
 
     }

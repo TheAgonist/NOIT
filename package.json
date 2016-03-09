@@ -10,7 +10,7 @@
     "express-session": "^1.11.3",
     "jsonwebtoken": "^5.0.2",
     "lodash": "^3.10.0",
-    "midifile": "^1.0.4",
+    "midifile": "~1.0.4",
     "mongodb": "^1.4.40",
     "monk": "^1.0.1",
     "multer": "1.1.0",
