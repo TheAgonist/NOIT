@@ -43,12 +43,10 @@
                 url: '/upload',
                 templateUrl: 'uploadFile/index.html',
                 controller: 'Upload.IndexController',
-                controllerAs: 'vm',
                 data: { activeTab: 'upload' }
             });
     }
-    
-    
+
     function run($http, $rootScope, $window) {
         // add JWT token as default auth header
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;

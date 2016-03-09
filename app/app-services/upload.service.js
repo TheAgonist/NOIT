@@ -7,8 +7,13 @@
 
     function Service($http, $q) {
         var service = {};
-        
+        service.upload = upload;
         return service;
+
+        function upload(record){
+            console.log(record);
+            return $http.post('/api/upload/post',record).then(handleSuccess, handleError);
+        }
 
         function handleSuccess(res) {
             return res.data;
