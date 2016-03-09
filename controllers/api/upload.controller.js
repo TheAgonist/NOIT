@@ -3,12 +3,12 @@ var express = require('express');
 var router = express.Router();
 var uploadService = require('services/upload.service');
 // routes
-router.post('/upload', upload);
+router.post('/post', upload);
 
 module.exports = router;
 
 function upload(req, res) {
-        //console.log(req.body);
+        console.log(req);
     uploadService.create(req.body)
     .then(function () {
         res.sendStatus(200);

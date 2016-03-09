@@ -2,30 +2,16 @@
     'use strict';
     angular
         .module('app')
-        .controller('Upload.IndexController', Controller);
-    function Controller(UploadService) {
-        initController();
-        function initController(){
-            $(function () {
-                $('#fileupload').fileupload({
-                    dataType: 'json',
-                    add: function (e, data) {
-                        data.context = $('<button/>').text('Upload')
-                            .appendTo(document.body)
-                            .click(function () {
-                                data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-                                console.log(data.submit());
-                                data.submit();
-                            });
-                    },
-                    done: function (e, data) {
-                        data.context.text('Upload finished.');
-                    }
-                });
+        .controller('Upload.IndexController', ['$scope', '$q', 'UploadService', function ($scope, $q, UploadService) {
+    $scope.fileInputContent = "";
+    $scope.onFileUpload = function (element) {
+        $scope.$apply(function (scope) {
+            console.log(scope);
+            var file = element.files[0];
+            UploadService.upload(file).then(function (fileInputContent) {
+                $scope.fileInputContent = fileInputContent;
             });
-        }
-        function submit(){
-            console.log("dd");
-        }
-    }
+        });
+    };
+}]);
 })();
