@@ -14,12 +14,11 @@ module.exports = service;
 function getAll(_id){
     var deferred = Q.defer();
 
-    recordsDB.find({},{sort : { votes : -1 } },function (err, record) {
+    recordsDB.find({show: 1},{sort : { votes : -1 } },function (err, record) {
         if (err) deferred.reject(err);
         if (record) {
             deferred.resolve(record);
         } else {
-            // user not found
             deferred.resolve();
         }
     });
@@ -32,13 +31,11 @@ function update(_id, recordParam) {
         var set = {
             votes: Number(recordParam.votes)+1,
         };
-        //console.log(_id);
         recordsDB.findAndModify(
             { _id: _id },
             { $set: set },
             function (err, doc) {
                 if (err) deferred.reject(err);
-
                 deferred.resolve();
             });
 

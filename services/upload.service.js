@@ -12,34 +12,48 @@ var service = {};
 
 service.create = createRecord;
 service.get = getAllRecordsForUser;
-
+service.update = update;
 module.exports = service;
 
-    function createRecord(record) {
-        var deferred = Q.defer();
-        recordsDb.insert(
-            record,
+function createRecord(record) {
+    var deferred = Q.defer();
+    recordsDb.insert(
+        record,
+        function (err, doc) {
+            if (err) deferred.reject(err);
+
+            deferred.resolve();
+        });
+
+    return deferred.promise;
+}
+
+function getAllRecordsForUser(user) {
+    var deferred = Q.defer();
+    recordsDb.find({userId: user},{sort : { votes : -1 } },function (err, record) {
+    if (err) deferred.reject(err);
+    if (record) {
+        deferred.resolve(record);
+    } else {
+        deferred.resolve();
+    }
+    });
+    return deferred.promise;
+}
+
+function update(_id, recordParam) {
+    var deferred = Q.defer();
+        var set = {
+            show: ~recordParam.show,
+        };
+        recordsDb.findAndModify(
+            { _id: _id },
+            { $set: set },
             function (err, doc) {
                 if (err) deferred.reject(err);
 
                 deferred.resolve();
             });
 
-    return deferred.promise;
-}
-
-    function getAllRecordsForUser(user) {
-        var deferred = Q.defer();
- 		//console.log(userParams);
-        recordsDb.find({userId: user},{sort : { votes : -1 } },function (err, record) {
-        if (err) deferred.reject(err);
-        if (record) {
-        	//console.log(record);
-            deferred.resolve(record);
-        } else {
-            deferred.resolve();
-        }
-    });
-        //console.log(deferred.promise);
     return deferred.promise;
 }

@@ -22,10 +22,8 @@ function getAllRecords(req, res) {
 }
 
 function updateRecord(req, res) {
-    //console.log(req);
     var recordId = req.body._id;
-        //console.log(req.body);
-       playService.update(recordId, req.body)
+    playService.update(recordId, req.body)
         .then(function () {
             res.sendStatus(200);
         })
