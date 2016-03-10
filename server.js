@@ -75,7 +75,7 @@ app.route('/upload')
                 res.redirect('back');           //where to go next
             });
         });
-    });<    
+    });
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');

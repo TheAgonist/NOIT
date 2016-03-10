@@ -62,7 +62,7 @@
     function readMidi(scope,sheetMusicService){
                 
 		//todo ask for arraybuffer
-		console.log(sheetMusicService)
+/*		console.log(sheetMusicService)
 		console.log(sheetMusicService.getRecordByID("d243").then(function (records) {
                 console.log(records);
                 for(var record in records){
@@ -78,8 +78,8 @@
                 		$scope.fileInputContent = fileInputContent;
             	    });
         });
-
-		  var anyBuffer = reader.readAsArrayBuffer("/Metallica-FadeToBlack.mid");
+*/
+		  var anyBuffer = {};
 		   
 		  // Creating the MIDIFile instance 
 		console.log(anyBuffer);
