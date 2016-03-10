@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('app')
-        .controller('sheetMusic.IndexController', Controller);
+        .controller('sheetMusic.IndexController',['$scope', '$q', 'sheetMusicService', Controller]);
    
-	function Controller(sheetMusicService) {
-	    
- initController();
-        function initController(){
+	function Controller($scope, $q, sheetMusicService) {
+
+ 	initController($scope);
+        function initController(scope){
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
           Vex.Flow.Renderer.Backends.CANVAS);
@@ -51,20 +51,20 @@
           // Render voice
           voice.draw(ctx, stave);
           voice2.draw(ctx, stave);
-          readMidi();
+          readMidi(scope);
         }
-
-        function readMidi(){
-                // Your variable with a ArrayBuffer instance containing your MIDI file 
-		//fs = require('fs');
-		fs.readFile('/Metallica-FadeToBlack.mid', 'base64', function (err,data) {
-		  if (err) {
-		    return console.log(err);
-		  }
-		  console.log(data);
-		});
-
 	
+        function readMidi(scope){
+                
+		//todo ask for arraybuffer
+		console.log(scope);
+		scope.$apply(function (scope) {
+	            console.log(scope);
+        	    var file = element.files[0];
+		    sheetMusicService.upload(file).then(function (fileInputContent) {
+                		$scope.fileInputContent = fileInputContent;
+            	    });
+        });
 
 		  var anyBuffer = reader.readAsArrayBuffer("/Metallica-FadeToBlack.mid");
 		   
