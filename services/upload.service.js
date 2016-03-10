@@ -11,6 +11,7 @@ var Q = require('q');
 var service = {};
 
 service.create = createRecord;
+service.get = getAllRecordsForUser;
 
 module.exports = service;
 
@@ -24,5 +25,20 @@ module.exports = service;
                 deferred.resolve();
             });
 
+    return deferred.promise;
+}
+    function getAllRecordsForUser(user) {
+        var deferred = Q.defer();
+ 		//console.log(userParams);
+        recordsDb.find({userId: user},{sort : { votes : -1 } },function (err, record) {
+        if (err) deferred.reject(err);
+        if (record) {
+        	//console.log(record);
+            deferred.resolve(record);
+        } else {
+            deferred.resolve();
+        }
+    });
+        //console.log(deferred.promise);
     return deferred.promise;
 }
