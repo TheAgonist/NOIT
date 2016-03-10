@@ -5,11 +5,12 @@ var uploadService = require('services/upload.service');
 // routes
 router.post('/post', upload);
 router.get('/getRecords',getRecordsForUser)
+router.put('/:_id',changeStatus);
 
 module.exports = router;
 
 function upload(req, res) {
-        console.log(req);
+        //console.log(req);
     uploadService.create(req.body)
     .then(function () {
         res.sendStatus(200);
@@ -32,4 +33,15 @@ function getRecordsForUser(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function changeStatus(req, res){
+	var recordId = req.body._id;
+	uploadService.update(recordId, req.body)
+		.then(function () {
+			res.sendStatus(200);
+		})
+		.catch(function (err) {
+			res.status(400).send(err);
+		});
 }

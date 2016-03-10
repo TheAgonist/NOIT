@@ -8,7 +8,6 @@
         function initController(){
             //display music files from database
             PlayService.getAll().then(function (records) {
-                //console.log(records);
                 for(var record in records){
                     displayRecord(records[record]);
                 }
@@ -63,7 +62,6 @@
 
 
         function upvoteFunc(record){
-            //console.log(record);
             PlayService.upvote(record);
         }
     }
