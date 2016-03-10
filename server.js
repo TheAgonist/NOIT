@@ -9,7 +9,7 @@ var config = require('config.json');
 var busboy = require('connect-busboy'); //middleware for form/file upload
 var path = require('path');     //used for file path
 var fs = require('fs-extra');       //File System - for file manipulation
-var playService = require('services/upload.service');
+//var playService = require('services/upload.service');
 
 
 app.use(busboy());
@@ -32,9 +32,9 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/play', require('./controllers/api/play.controller'));
 app.use('/api/upload', require('./controllers/api/upload.controller'));
-//app.use('/sheetMusic', require('./controllers/api/sheetMusic.controller'));
+app.use('/api/sheetMusic', require('./controllers/api/sheetMusic.controller'));
 
-app.route('/sheetMusic')
+/*app.route('/sheetMusic')
     .get(function (req, res, next) {
         console.log("ddd");
         var fstream;
@@ -56,7 +56,7 @@ app.route('/sheetMusic')
 
         });
     });
-
+*/
 
 app.route('/upload')
     .post(function (req, res, next) {

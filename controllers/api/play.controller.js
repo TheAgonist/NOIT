@@ -1,5 +1,6 @@
 var config = require('config.json');
 var express = require('express');
+var fs = require('fs-extra');
 var router = express.Router();
 var playService = require('services/play.service');
 // routes
