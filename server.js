@@ -32,16 +32,16 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/play', require('./controllers/api/play.controller'));
 app.use('/api/upload', require('./controllers/api/upload.controller'));
+//app.use('/sheetMusic', require('./controllers/api/sheetMusic.controller'));
 
 app.route('/sheetMusic')
-    .post(function (req, res, next) {
-
+    .get(function (req, res, next) {
+        console.log("ddd");
         var fstream;
         req.pipe(req.busboy);
         req.busboy.on('file', function (fieldname, file, filename) {
             console.log("Uploading: " + filename);
             //console.log(__dirname);
-            //Path where image will be uploaded
             readStream = fs.createReadStream(__dirname + '/public/img/' + filename);
             file.pipe(fstream);    
             //console.log(fstream);
@@ -75,7 +75,7 @@ app.route('/upload')
                 res.redirect('back');           //where to go next
             });
         });
-    });<    
+    });
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
