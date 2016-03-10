@@ -9,6 +9,8 @@ var config = require('config.json');
 var busboy = require('connect-busboy'); //middleware for form/file upload
 var path = require('path');     //used for file path
 var fs = require('fs-extra');       //File System - for file manipulation
+var playService = require('services/upload.service');
+
 
 app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,31 +35,20 @@ app.use('/api/upload', require('./controllers/api/upload.controller'));
 
 app.route('/upload')
     .post(function (req, res, next) {
-        var form = new formidable.IncomingForm();
-        //Formidable uploads to operating systems tmp dir by default
-        form.uploadDir = "./public/img";       //set upload directory
-        form.keepExtensions = true;     //keep file extension
 
-        form.parse(req, function(err, fields, files) {
-            console.log(files.type);
-            res.writeHead(200, {'content-type': 'text/plain'});
-            res.write('received upload:\n\n');
-            console.log("form.bytesReceived");
-            //TESTING
-            console.log("file size: "+JSON.stringify(files.fileUploaded.size));
-            console.log("file path: "+JSON.stringify(files.fileUploaded.path));
-            console.log("file name: "+JSON.stringify(files.fileUploaded.name));
-            console.log("file type: "+JSON.stringify(files.fileUploaded.type));
-            console.log("astModifiedDate: "+JSON.stringify(files.fileUploaded.lastModifiedDate));
+        var fstream;
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) {
+            console.log("Uploading: " + filename);
 
-            //Formidable changes the name of the uploaded file
-            //Rename the file to its original name
-            fs.rename(files.fileUploaded.path, './public/img/'+files.fileUploaded.name, function(err) {
-            if (err)
-                throw err;
-              console.log('renamed complete');  
+            //Path where image will be uploaded
+            fstream = fs.createWriteStream(__dirname + '/public/img/' + filename);
+            file.pipe(fstream);
+            fstream.on('close', function () {    
+                console.log("Upload Finished of " + filename);
+                playService.U              
+                res.redirect('back');           //where to go next
             });
-              res.end();
         });
     });
 
