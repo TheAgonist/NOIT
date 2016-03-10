@@ -6,8 +6,10 @@
    
 	function Controller($scope, $q, sheetMusicService) {
 
- 	initController($scope);
-        function initController(scope){
+ 	initController($scope,sheetMusicService);
+        function initController(scope,sheetMusicService){
+      	  
+
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
           Vex.Flow.Renderer.Backends.CANVAS);
@@ -54,10 +56,21 @@
           readMidi(scope);
         }
 	
-        function readMidi(scope){
+
+
+
+    function readMidi(scope,sheetMusicService){
                 
 		//todo ask for arraybuffer
-		console.log(scope);
+		console.log(sheetMusicService)
+		console.log(sheetMusicService.getRecordByID("d243").then(function (records) {
+                console.log(records);
+                for(var record in records){
+                	console.log(records[record]);
+                    //displayRecord(records[record]);
+                }
+           }));
+
 		scope.$apply(function (scope) {
 	            console.log(scope);
         	    var file = element.files[0];
@@ -69,7 +82,7 @@
 		  var anyBuffer = reader.readAsArrayBuffer("/Metallica-FadeToBlack.mid");
 		   
 		  // Creating the MIDIFile instance 
-	console.log(anyBuffer);
+		console.log(anyBuffer);
 		  var midiFile = new MIDIFile(anyBuffer);
 		  
 		  // Reading headers 

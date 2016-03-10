@@ -33,7 +33,7 @@ app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/play', require('./controllers/api/play.controller'));
 app.use('/api/upload', require('./controllers/api/upload.controller'));
 
-app.route('/getSong')
+app.route('/sheetMusic')
     .post(function (req, res, next) {
 
         var fstream;
@@ -47,10 +47,13 @@ app.route('/getSong')
             //console.log(fstream);
             fstream.on('open', function () {
                 console.log("Sent " + filename);              
-                
-
-                res.redirect('back');           //where to go next
+                readStream.pipe(res);
             });
+
+            readStream.on('error', function(err) {
+                res.end(err);
+            });
+
         });
     });
 
@@ -72,7 +75,7 @@ app.route('/upload')
                 res.redirect('back');           //where to go next
             });
         });
-    });
+    });<    
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
