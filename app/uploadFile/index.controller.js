@@ -3,11 +3,12 @@
     angular
         .module('app')
         .controller('Upload.IndexController', Controller);
-    function Controller(UploadService) {
+    function Controller($window, UploadService, UserService) {
+        var vm = this;
+        vm.user = null;
         initController();
         function initController(){
             UploadService.getAll().then(function (records) {
-                //console.log(records);
                 for(var record in records){
                 	//console.log(records[record]);
                     displayRecord(records[record]);

@@ -6,8 +6,8 @@
     function Controller(sheetMusicService) {
         initController();
         function initController(){
-          var Buffer = sheetMusicService.getBuffer("Night");
-          console.log(Buffer);
+          var Buffer = sheetMusicService.getBuffer("Metallica-FadeToBlack.mid");
+          //console.log(Buffer);
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
           Vex.Flow.Renderer.Backends.CANVAS);
