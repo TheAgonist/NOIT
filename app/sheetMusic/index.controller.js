@@ -6,7 +6,7 @@
     function Controller(sheetMusicService) {
         initController();
         function initController(){
-          var Buffer = sheetMusicService.getBuffer("Metallica-FadeToBlack.mid");
+          var Buffer = sheetMusicService.getBuffer("appass_1.mid");
           //console.log(Buffer);
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
@@ -18,9 +18,9 @@
           // Add a treble clef
           stave.addClef("treble");
           stave.setContext(ctx).draw();
-
+          readMidi(Buffer.value);
           // Create a quarter E, a half D, and a quarter C-Major chord.
-          var notes = [
+          /*var notes = [
             new Vex.Flow.StaveNote({ keys: ["e/5"], duration: "q" }),
             new Vex.Flow.StaveNote({ keys: ["d/5"], duration: "h" }),
             new Vex.Flow.StaveNote({ keys: ["c/5", "e/5", "g/5"], duration: "q" })
@@ -50,29 +50,31 @@
 
           // Render voice
           voice.draw(ctx, stave);
-          voice2.draw(ctx, stave);
+          voice2.draw(ctx, stave);*/
                 //readMidi();
         }
-        function readMidi(){
+
+
+        function readMidi(anyBuffer){
                     // Your variable with a ArrayBuffer instance containing your MIDI file 
-          var anyBuffer = "/Metallica-FadeToBlack.mid";
+          //var anyBuffer = "/Metallica-FadeToBlack.mid";
            
           // Creating the MIDIFile instance 
           var midiFile = new MIDIFile(anyBuffer);
-           
+          console.log(midiFile);
           // Reading headers 
           midiFile.header.getFormat(); // 0, 1 or 2 
           midiFile.header.getTracksCount(); // n 
           // Time division 
-          if(midiFile.header.getTimeDivision() === MIDIFileHeader.TICKS_PER_BEAT) {
+          if(midiFile.header.getTimeDivision() === midiFile.header.getTicksPerBit) {
             midiFile.header.getTicksPerBit();
           } else {
-            midiFile.header.getSMPTEFrames();
-            midiFile.header.getTicksPerFrame();
+            midiFile.header.getTimeDivision();
           }
            
           // MIDI events retriever 
           var events = midiFile.getMidiEvents();
+          console.log(midiFile.getMidiEvents());  
           events[0].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34) 
           events[0].playTime; // time in ms at wich the event must be played 
           events[0].param1; // first parameter 
