@@ -15,13 +15,13 @@ service.get = getAllRecordsForUser;
 service.update = update;
 module.exports = service;
 
-function createRecord(record) {
+function createRecord(record) {   
     var deferred = Q.defer();
     recordsDb.insert(
         record,
         function (err, doc) {
             if (err) deferred.reject(err);
-
+            
             deferred.resolve();
         });
 

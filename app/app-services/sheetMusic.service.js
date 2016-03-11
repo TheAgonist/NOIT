@@ -11,8 +11,8 @@
         return service;
 
         function getBuffer(bufferName){
-            console.log("dd");
-            return $http.get('/api/sheetMusic/receive').then(handleSuccess,handleError);
+            //console.log(bufferName);
+            return $http.get('/api/sheetMusic/'+bufferName).then(handleSuccess,handleError);
         }
 
         function handleSuccess(res) {
@@ -23,5 +23,4 @@
             return $q.reject(res.data);
         }
     }
-
 })();

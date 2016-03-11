@@ -5,14 +5,13 @@ var fs = require('fs-extra');
 var router = express.Router();
 var playService = require('services/play.service');
 // routes
-router.get('/receive', getBuffer);
+router.get('/:bufferName', getBuffer);
 //router.put('/:_id', updateRecord);
 
 module.exports = router;
 function getBuffer(req, res) {
-    //console.log(_dirname);
     var fstream;
-    readStream = fs.createReadStream("public/img/Metallica-FadeToBlack.mid");
+    readStream = fs.createReadStream("public/img/"+req.params.bufferName);
 
     // This will wait until we know the readable stream is actually valid before piping
     readStream.on('open', function () {

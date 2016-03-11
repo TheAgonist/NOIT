@@ -9,7 +9,7 @@ var config = require('config.json');
 var busboy = require('connect-busboy'); //middleware for form/file upload
 var path = require('path');     //used for file path
 var fs = require('fs-extra');       //File System - for file manipulation
-//var playService = require('services/upload.service');
+var uploadService = require('services/upload.service');
 
 
 app.use(busboy());
@@ -34,30 +34,6 @@ app.use('/api/play', require('./controllers/api/play.controller'));
 app.use('/api/upload', require('./controllers/api/upload.controller'));
 app.use('/api/sheetMusic', require('./controllers/api/sheetMusic.controller'));
 
-/*app.route('/sheetMusic')
-    .get(function (req, res, next) {
-        console.log("ddd");
-        var fstream;
-        req.pipe(req.busboy);
-        req.busboy.on('file', function (fieldname, file, filename) {
-            console.log("Uploading: " + filename);
-            //console.log(__dirname);
-            readStream = fs.createReadStream(__dirname + '/public/img/' + filename);
-            file.pipe(fstream);    
-            //console.log(fstream);
-            fstream.on('open', function () {
-                console.log("Sent " + filename);              
-                readStream.pipe(res);
-            });
-
-            readStream.on('error', function(err) {
-                res.end(err);
-            });
-
-        });
-    });
-*/
-
 app.route('/upload')
     .post(function (req, res, next) {
 
@@ -70,8 +46,14 @@ app.route('/upload')
             fstream = fs.createWriteStream(__dirname + '/public/img/' + filename);
             file.pipe(fstream);
             fstream.on('close', function () {    
-                console.log("Upload Finished of " + filename);
-                playService.U              
+                //console.log("Upload Finished of " + filename);
+                var set = {
+                    name: filename,
+                    user: req.session.user,
+                    show: -2,
+                    delete: false,
+                };
+                uploadService.create(set);
                 res.redirect('back');           //where to go next
             });
         });
