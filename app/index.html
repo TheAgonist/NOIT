@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,10 +8,12 @@
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <link href="app-content/app.css" rel="stylesheet" />
+
 </head>
 <body class="container">
     <!-- header -->
-    <header>
+    <header >
+        <img src="header/logo.png">
         <link href="app-content/app.css" rel="stylesheet" />
         <ul class="nav nav-tabs">
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
@@ -29,7 +33,21 @@
     <main ui-view></main>
 
     <!-- footer -->
-    <footer></footer>
+    <footer class="w3-container w3-padding-32 w3-theme w3-center">
+      <hr>
+      <h4>Follow Us</h4>
+      <a class="w3-btn-floating w3-teal" href="javascript:void(0)" title="Facebook"><i class="fa fa-facebook"></i></a>
+      <a class="w3-btn-floating w3-teal" href="javascript:void(0)" title="Twitter"><i class="fa fa-twitter"></i></a>
+      <a class="w3-btn-floating w3-teal" href="javascript:void(0)" title="Google +"><i class="fa fa-google-plus"></i></a>
+      <a class="w3-btn-floating w3-teal" href="javascript:void(0)" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+      <p>© Copyright whatever</p>           
+
+      <div style="position:relative;bottom:103px;z-index:1;" class="w3-tooltip w3-right">
+        <span class="w3-text w3-padding w3-teal">Go To Top</span>   
+        <a class="w3-btn w3-theme" href="#myPage"><span class="w3-xlarge">
+        <i class="fa fa-chevron-circle-up"></i></span></a>
+      </div>         <         
+    </footer>
 
     <!--<div ui-view></div>-->
 
@@ -55,3 +73,5 @@
     <script src="uploadFile/index.controller.js"></script>
 </body>
 </html>
+
+
