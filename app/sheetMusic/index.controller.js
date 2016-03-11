@@ -7,6 +7,7 @@
         initController();
         function initController(){
           var Buffer = sheetMusicService.getBuffer("Night");
+          console.log("lllllllllll");
           console.log(Buffer);
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
