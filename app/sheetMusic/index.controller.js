@@ -3,11 +3,13 @@
     angular
         .module('app')
         .controller('sheetMusic.IndexController', Controller);
-    function Controller(sheetMusicService) {
+    function Controller(sheetMusicService, songs) {
         initController();
         function initController(){
           var Buffer = sheetMusicService.getBuffer("appass_1.mid");
-          //console.log(Buffer);
+          console.log(songs[0]);
+          //console.log(sheetMusicService.resolve(Buffer));
+          
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
           Vex.Flow.Renderer.Backends.CANVAS);
@@ -18,9 +20,9 @@
           // Add a treble clef
           stave.addClef("treble");
           stave.setContext(ctx).draw();
-          readMidi(Buffer.value);
+          readMidi(Buffer);
           // Create a quarter E, a half D, and a quarter C-Major chord.
-          /*var notes = [
+          var notes = [
             new Vex.Flow.StaveNote({ keys: ["e/5"], duration: "q" }),
             new Vex.Flow.StaveNote({ keys: ["d/5"], duration: "h" }),
             new Vex.Flow.StaveNote({ keys: ["c/5", "e/5", "g/5"], duration: "q" })
@@ -50,7 +52,7 @@
 
           // Render voice
           voice.draw(ctx, stave);
-          voice2.draw(ctx, stave);*/
+          voice2.draw(ctx, stave);
                 //readMidi();
         }
 

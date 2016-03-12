@@ -33,10 +33,19 @@
                 data: { activeTab: 'play' }
             })
             .state('sheetMusic', {
-                url: '/sheetMusic',
+                url: '/:bufferName',
                 templateUrl: 'sheetMusic/index.html',
                 controller: 'sheetMusic.IndexController',
                 controllerAs: 'vm',
+                resolve: {
+                    songs: 
+                        ['$http','$stateParams',function($http, $stateParams){
+                           return $http.get('/api/sheetMusic/'+$stateParams.bufferName).then(function(song){
+                                //console.log(song);
+                                return song.data;
+                            });
+                        }]
+                },
                 data: { activeTab: 'sheetMusic' }
             })
             .state('upload', {
