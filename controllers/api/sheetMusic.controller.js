@@ -6,6 +6,7 @@ var router = express.Router();
 var playService = require('services/play.service');
 //var sheetMusicService = require ('services/sheetMusic.service');
 // routes
+router.get('/sheetMusic');
 router.get('/:bufferName', getBuffer);
 //router.put('/:_id', updateRecord);
 
@@ -19,7 +20,7 @@ function getBuffer(req, res) {
     // This just pipes the read stream to the response object (which goes to the client)
     console.log("----------------");
     //console.log(res);
-        readStream.pipe(res);
+        readStream.pipe(response);
 
     });
 

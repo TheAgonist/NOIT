@@ -33,7 +33,7 @@
                 data: { activeTab: 'play' }
             })
             .state('sheetMusic', {
-                url: '/:bufferName',
+                url: '/sheetMusic',
                 templateUrl: 'sheetMusic/index.html',
                 controller: 'sheetMusic.IndexController',
                 controllerAs: 'vm',
@@ -42,7 +42,9 @@
                         ['$http','$stateParams',function($http, $stateParams){
                            return $http.get('/api/sheetMusic/'+$stateParams.bufferName).then(function(song){
                                 //console.log(song);
-                                return song.data;
+                                song.on('end',function(){
+
+                                });
                             });
                         }]
                 },
@@ -53,6 +55,12 @@
                 templateUrl: 'uploadFile/index.html',
                 controller: 'Upload.IndexController',
                 data: { activeTab: 'upload' }
+            })
+            .state('generator', {
+                url: '/generate',
+                templateUrl: 'generator/index.html',
+                controller: 'Generator.IndexController',
+                data: { activeTab: 'generator' }
             });
     }
 
