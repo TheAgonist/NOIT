@@ -30,9 +30,10 @@ function createRecord(record) {
 
 function getAllRecordsForUser(user) {
     var deferred = Q.defer();
-    recordsDb.find({userId: user},{sort : { votes : -1 } },function (err, record) {
+    recordsDb.find({user: user},{sort : { votes : -1 } },function (err, record) {
     if (err) deferred.reject(err);
     if (record) {
+        //console.log(record);
         deferred.resolve(record);
     } else {
         deferred.resolve();

@@ -16,8 +16,8 @@
             return $http.post('/api/upload/post',record).then(handleSuccess, handleError);
         }
 
-        function getAll(){
-            return $http.get('/api/upload/getRecords').then(handleSuccess, handleError);
+        function getAll(userName){
+            return $http.get('/api/upload/'+userName).then(handleSuccess, handleError);
         }
 
         function change(record){
