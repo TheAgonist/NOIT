@@ -51,6 +51,7 @@ app.route('/upload')
                     name: filename,
                     user: req.session.user,
                     show: -2,
+                    votes: 0,
                     delete: false,
                 };
                 uploadService.create(set);

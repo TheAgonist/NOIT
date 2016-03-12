@@ -4,7 +4,7 @@ var router = express.Router();
 var uploadService = require('services/upload.service');
 // routes
 router.post('/post', upload);
-router.get('/getRecords',getRecordsForUser)
+router.get('/:userName',getRecordsForUser)
 router.put('/:_id',changeStatus);
 
 module.exports = router;
@@ -21,8 +21,7 @@ function upload(req, res) {
 }
 
 function getRecordsForUser(req, res) {
-        //console.log(req.user.sub);
-    uploadService.get(req.user.sub)
+    uploadService.get(req.session.user)
     .then(function (records) {
             if (records) {
                 res.send(records);
