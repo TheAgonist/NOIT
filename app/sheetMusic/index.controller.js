@@ -7,7 +7,7 @@
         initController();
         function initController(){
           var Buffer = sheetMusicService.getBuffer("appass_1.mid");
-          console.log(songs[0]);
+          console.log(function($scope, category) { $scope.cat = category });
           //console.log(sheetMusicService.resolve(Buffer));
           
       	  var canvas = $("canvas")[0];
