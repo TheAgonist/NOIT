@@ -33,18 +33,17 @@
                 data: { activeTab: 'play' }
             })
             .state('sheetMusic', {
-                url: '/sheetMusic',
+                url: '/sheetMusic?bufferName',
                 templateUrl: 'sheetMusic/index.html',
                 controller: 'sheetMusic.IndexController',
                 controllerAs: 'vm',
                 resolve: {
                     songs: 
                         ['$http','$stateParams',function($http, $stateParams){
-                           return $http.get('/api/sheetMusic/'+$stateParams.bufferName).then(function(song){
-                                //console.log(song);
-                                song.on('end',function(){
-
-                                });
+                           console.log($stateParams);
+                           return $http.get('/img/'+$stateParams.bufferName).then(function(song){
+                                //console.log(song.data);
+                                return song.data;
                             });
                         }]
                 },

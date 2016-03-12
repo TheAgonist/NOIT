@@ -6,9 +6,11 @@
     function Controller(sheetMusicService, songs) {
         initController();
         function initController(){
-          var Buffer = sheetMusicService.getBuffer("appass_1.mid");
-          console.log(function($scope, category) { $scope.cat = category });
-          //console.log(sheetMusicService.resolve(Buffer));
+          console.log(typeof(songs));
+          var Buffer = new Uint16Array(songs);
+          //var bufView = new Uint16Array(buf)
+          //console.log(function($scope, category) { return category; });
+          
           
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
