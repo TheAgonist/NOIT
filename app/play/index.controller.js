@@ -67,7 +67,7 @@
             var audio = document.createElement("AUDIO");
             audio.controls = true;
             var source = document.createElement("SOURCE");
-            source.src = "http://localhost:3000/img/2013-06-02%2019.49.06.jpg";
+            source.src = "http://localhost:3000/img/Night.mp3";
             console.log(source.src);
             source.type = "audio/mpeg"
             audio.appendChild(source);
