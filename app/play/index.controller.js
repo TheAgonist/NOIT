@@ -20,12 +20,25 @@
             var first = document.createElement("TD");
             first.innerHTML = rank;
             var second = document.createElement("TD");
-            first.innerHTML = record.name;
-            var second = document.createElement("TD");
-            first.innerHTML = record.name;
+            second.innerHTML = record.name;
+            var third = document.createElement("TD");
+            third.innerHTML = record.user
+            var fourth = document.createElement("TD");
+            fourth.innerHTML = record.votes
+            var fifth = document.createElement("TD");
+            var button = createUpvoteButton(record);
+            fifth.appendChild(button);
+            var sixth = document.createElement("TD");
+            var button = createPlayButton(record);
+            sixth.appendChild(button);
             var row = document.createElement("TR");
+            row.id = "row";
             row.appendChild(first);
             row.appendChild(second);
+            row.appendChild(third);
+            row.appendChild(fourth);
+            row.appendChild(fifth);
+            row.appendChild(sixth);
             var table = document.getElementById("listRecords");
             table.appendChild(row);
         }
@@ -36,6 +49,7 @@
                 upvoteFunc(record);
                  };
             upvote.innerHTML = "UPVOTE";
+            //console.log(record);
             return upvote;
             
         }
