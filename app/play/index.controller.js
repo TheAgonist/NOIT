@@ -8,26 +8,26 @@
         function initController(){
             //display music files from database
             PlayService.getAll().then(function (records) {
+                var rank = 1;
                 for(var record in records){
-                    displayRecord(records[record]);
+                    displayRecord(records[record], rank);
+                    rank++;
                 }
             });
         }
 
-        function displayRecord(record){
-            var name = document.createElement("P");
-            name.innerHTML = record.name;
-            var upvote = createUpvoteButton(record);
-            var play = createPlayButton(record);
-            var divContainer = document.createElement("DIV");
-            divContainer.appendChild(name);
-            divContainer.appendChild(upvote);
-            divContainer.appendChild(play);
-            divContainer.id = "row";
-            var row = document.createElement("LI");
-            row.appendChild(divContainer);
-            var listRecords = document.getElementById("listRecords");
-            listRecords.appendChild(row);
+        function displayRecord(record, rank){
+            var first = document.createElement("TD");
+            first.innerHTML = rank;
+            var second = document.createElement("TD");
+            first.innerHTML = record.name;
+            var second = document.createElement("TD");
+            first.innerHTML = record.name;
+            var row = document.createElement("TR");
+            row.appendChild(first);
+            row.appendChild(second);
+            var table = document.getElementById("listRecords");
+            table.appendChild(row);
         }
         function createUpvoteButton(record){
             var upvote = document.createElement("BUTTON");
