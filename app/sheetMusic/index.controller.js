@@ -3,13 +3,30 @@
     angular
         .module('app')
         .controller('sheetMusic.IndexController', Controller);
-    function Controller(sheetMusicService, songs) {
+    function Controller(sheetMusicService, $scope) {
         initController();
         function initController(){
-          console.log(typeof(songs));
-          var Buffer = new Uint16Array(songs);
-          //var bufView = new Uint16Array(buf)
-          //console.log(function($scope, category) { return category; });
+          //console.log(songs);
+          var songs = sheetMusicService.getBuffer('appass_1.mid').then(function(response){
+            console.log(response);
+            var buf = new ArrayBuffer(response.data.length*2);
+            var bufView = new Uint16Array(buf);
+            //console.log(response.data.toString());
+            /*for (var i=0, strLen=response.data.length; strLen; i++) {
+              //console.log(response.data.charCodeAt());
+              bufView[i] = response.data.charCodeAt(i);
+            }*/
+            //console.log(bufView);
+            readMidi(response.data);
+            //$scope.buffer = data;
+          });
+          //console.log($scope.buffer);
+          /*var buf = new ArrayBuffer(songs.length*2);
+          var bufView = new Uint16Array(buf);*/
+          /*for (var i=0, strLen=songs.length; i &lt; strLen; i++) {
+            //bufView[i] = songs.charCodeAt(i);
+          }*/
+
           
           
       	  var canvas = $("canvas")[0];
@@ -22,7 +39,7 @@
           // Add a treble clef
           stave.addClef("treble");
           stave.setContext(ctx).draw();
-          readMidi(Buffer);
+          //readMidi(buf);
           // Create a quarter E, a half D, and a quarter C-Major chord.
           var notes = [
             new Vex.Flow.StaveNote({ keys: ["e/5"], duration: "q" }),

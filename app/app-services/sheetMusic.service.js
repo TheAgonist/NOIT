@@ -10,22 +10,25 @@
         service.getBuffer = getBuffer;
         service.song = null;
         return service;
+        //var request = require('sync-request');
 
         function getBuffer(bufferName){
             //console.log(bufferName);
-            /*$http.get('/api/sheetMusic/'+bufferName).then(handleSuccess,handleError).then(function(song){
-                //console.log(song);
+            /*$http.get('/api/sheetMusic/'+bufferName).then(function(song){
+                console.log(song);
                 return song;
-            });*/
-            $http.get('/img/'+bufferName).then(handleSuccess,handleError);
-            //console.log(contra);
+            }).then(handleSuccess,handleError);*/
+            return $http.get('/api/sheetMusic/'+bufferName).then(handleSuccess,handleError);
+            //var res = request('GET', '/img/'+bufferName);
+            //console.log(res.getBody());
             //return contra;
         }
 
         function handleSuccess(res) {
             //console.log(res.data);
             //$scope.Buffer = res.data;
-            //service.song = res;   
+            //service.song = res;
+            console.log("fff");   
             console.log(res);
             return res;
         }
