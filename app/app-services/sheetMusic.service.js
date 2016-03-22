@@ -24,11 +24,7 @@
             //return contra;
         }
 
-        function handleSuccess(res) {
-            //console.log(res.data);
-            //$scope.Buffer = res.data;
-            //service.song = res;
-            console.log("fff");   
+        function handleSuccess(res) {  
             console.log(res);
             return res;
         }

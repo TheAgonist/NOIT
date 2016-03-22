@@ -7,17 +7,26 @@
         initController();
         function initController(){
           //console.log(songs);
-          var songs = sheetMusicService.getBuffer('appass_1.mid').then(function(response){
-            console.log(response);
-            var buf = new ArrayBuffer(response.data.length*2);
+          var songs = sheetMusicService.getBuffer('Metallica-FadeToBlack.mid').then(function(response){
+            console.log(Object.prototype.toString.call(response.data));
+            //var ab = toArrayBuffer(response.data);
+            /*var buf = new ArrayBuffer(response.data.length*2);
             var bufView = new Uint16Array(buf);
             //console.log(response.data.toString());
-            /*for (var i=0, strLen=response.data.length; strLen; i++) {
+            for (var i=0, strLen = (response.data.length/100); strLen; i++) {
               //console.log(response.data.charCodeAt());
               bufView[i] = response.data.charCodeAt(i);
             }*/
-            //console.log(bufView);
-            readMidi(response.data);
+
+          var string = btoa(unescape(encodeURIComponent(response.data))),
+              charList = string.split(''),
+              uintArray = [];
+          for (var i = 0; i < charList.length; i++) {
+              uintArray.push(charList[i].charCodeAt(0));
+          }
+
+            console.log(Object.prototype.toString.call(stringToUint(response.data)));
+            readMidi(stringToUint(response.data));
             //$scope.buffer = data;
           });
           //console.log($scope.buffer);
@@ -73,6 +82,16 @@
           voice.draw(ctx, stave);
           voice2.draw(ctx, stave);
                 //readMidi();
+        }
+
+        function stringToUint(string) {
+          var string = btoa(unescape(encodeURIComponent(string))),
+              charList = string.split(''),
+              uintArray = [];
+          for (var i = 0; i < charList.length; i++) {
+              uintArray.push(charList[i].charCodeAt(0));
+          }
+          return new Uint8Array(uintArray);
         }
 
 

@@ -2,6 +2,7 @@ var config = require('config.json');
 var express = require('express');
 var busboy = require('connect-busboy');
 var fs = require('fs-extra');
+var toArrayBuffer = require('to-arraybuffer'); 
 var router = express.Router();
 var playService = require('services/play.service');
 //var sheetMusicService = require ('services/sheetMusic.service');
@@ -14,22 +15,15 @@ module.exports = router;
 function getBuffer(req, res) {
     //var fstream;
     var readStream = fs.readFile("public/img/"+req.params.bufferName,function(err,data){
-        console.log(data);
-        res.send(data.toJSON());
+        res.send(data);
     });
+    /*var readStream = fs.createReadStream("public/img/"+req.params.bufferName);
     //console.log(readStream);
     // This will wait until; we know the readable stream is actually valid before piping
-    //readStream.on('open', function () {
-    // This just pipes the read stream to the response object (which goes to the client)
-    //console.log("----------------");
-    //console.log(res);
-      //  readStream.pipe(response);
-
-    //});
-
-    // This catches any errors that happen while creating the readable stream (usually invalid names)
-    //readStream.on('error', function(err) {
-      //  console.log("error");
-        //res.end(err);
-    //});
+    readStream.on('open', function () {
+        readStream.pipe(res);
+    });
+    readStream.on('end', function () {
+        readStream.end(res);
+    });*/
 }
