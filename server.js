@@ -1,4 +1,4 @@
-﻿require('rootpath')();
+require('rootpath')();
 var express = require('express');
 var app = express();
 var formidable = require('formidable');
@@ -10,7 +10,6 @@ var busboy = require('connect-busboy'); //middleware for form/file upload
 var path = require('path');     //used for file path
 var fs = require('fs-extra');       //File System - for file manipulation
 var uploadService = require('services/upload.service');
-
 
 app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));

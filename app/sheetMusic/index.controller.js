@@ -3,11 +3,15 @@
     angular
         .module('app')
         .controller('sheetMusic.IndexController', Controller);
+<<<<<<< HEAD
     
 
 
 
     function Controller(sheetMusicService, songs) {
+=======
+    function Controller(sheetMusicService, $scope) {
+>>>>>>> 6d4da9e4f1ac598fd047b7587c78a382b193b19a
         initController();
         function toArrayBuffer(buffer) {
           //console.log(buffer);
@@ -55,10 +59,43 @@
         }
 
         function initController(){
+<<<<<<< HEAD
           //console.log(typeof(songs));
 
           //var bufView = new Uint16Array(buf)
           //console.log(function($scope, category) { return category; });
+=======
+          //console.log(songs);
+          var songs = sheetMusicService.getBuffer('Metallica-FadeToBlack.mid').then(function(response){
+            console.log(Object.prototype.toString.call(response.data));
+            //var ab = toArrayBuffer(response.data);
+            /*var buf = new ArrayBuffer(response.data.length*2);
+            var bufView = new Uint16Array(buf);
+            //console.log(response.data.toString());
+            for (var i=0, strLen = (response.data.length/100); strLen; i++) {
+              //console.log(response.data.charCodeAt());
+              bufView[i] = response.data.charCodeAt(i);
+            }*/
+
+          var string = btoa(unescape(encodeURIComponent(response.data))),
+              charList = string.split(''),
+              uintArray = [];
+          for (var i = 0; i < charList.length; i++) {
+              uintArray.push(charList[i].charCodeAt(0));
+          }
+
+            console.log(Object.prototype.toString.call(stringToUint(response.data)));
+            readMidi(stringToUint(response.data));
+            //$scope.buffer = data;
+          });
+          //console.log($scope.buffer);
+          /*var buf = new ArrayBuffer(songs.length*2);
+          var bufView = new Uint16Array(buf);*/
+          /*for (var i=0, strLen=songs.length; i &lt; strLen; i++) {
+            //bufView[i] = songs.charCodeAt(i);
+          }*/
+
+>>>>>>> 6d4da9e4f1ac598fd047b7587c78a382b193b19a
           
           //console.log(songs);
           //var buffer = str2ab(songs);
@@ -72,6 +109,7 @@
           //console.log(buffer);
       	  var canvas = $("canvas")[0];
           var renderer = new Vex.Flow.Renderer(canvas,
+<<<<<<< HEAD
     Vex.Flow.Renderer.Backends.CANVAS);
 
   var ctx = renderer.getContext();
@@ -130,6 +168,37 @@
   });
 
   var all_notes = notes.concat(notes2).concat(notes3).concat(notes4);
+=======
+          Vex.Flow.Renderer.Backends.CANVAS);
+
+          var ctx = renderer.getContext();
+          var stave = new Vex.Flow.Stave(10, 0, 500);
+
+          // Add a treble clef
+          stave.addClef("treble");
+          stave.setContext(ctx).draw();
+          //readMidi(buf);
+          // Create a quarter E, a half D, and a quarter C-Major chord.
+          var notes = [
+            new Vex.Flow.StaveNote({ keys: ["e/5"], duration: "q" }),
+            new Vex.Flow.StaveNote({ keys: ["d/5"], duration: "h" }),
+            new Vex.Flow.StaveNote({ keys: ["c/5", "e/5", "g/5"], duration: "q" })
+          ];
+
+          // Create a second voice, with just one whole note
+          var notes2 = [
+            new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "w" })
+          ];
+
+          // Create a voice in 4/4
+          function create_4_4_voice() {
+            return new Vex.Flow.Voice({
+              num_beats: 4,
+              beat_value: 4,
+              resolution: Vex.Flow.RESOLUTION
+            });
+          }
+>>>>>>> 6d4da9e4f1ac598fd047b7587c78a382b193b19a
 
   // Helper function to justify and draw a 4/4 voice
   Vex.Flow.Formatter.FormatAndDraw(ctx, stave, all_notes);
@@ -146,6 +215,16 @@
                 //readMidi();
           console.log(songs.data);
           readMidi(buff);
+        }
+
+        function stringToUint(string) {
+          var string = btoa(unescape(encodeURIComponent(string))),
+              charList = string.split(''),
+              uintArray = [];
+          for (var i = 0; i < charList.length; i++) {
+              uintArray.push(charList[i].charCodeAt(0));
+          }
+          return new Uint8Array(uintArray);
         }
 
 

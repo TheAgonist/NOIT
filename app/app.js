@@ -37,11 +37,11 @@
                 templateUrl: 'sheetMusic/index.html',
                 controller: 'sheetMusic.IndexController',
                 controllerAs: 'vm',
-                resolve: {
+                /*resolve: {
                     songs: 
                         ['$http','$stateParams',function($http, $stateParams){
                            console.log($stateParams);
-                           return $http.get('/img/'+$stateParams.bufferName).then(function(song){
+                           return $http.get('/img/Metallica-FadeToBlack.mid').then(function(song){
                                 //console.log(song.data);
                                 return song.data;
                             });
