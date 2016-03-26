@@ -8,11 +8,23 @@
     function Service($http, $q) {
         var service = {};
         service.getAll = getAll;
-        service.upvote = upvote;
+	service.getBuffer = getBuffer;        
+	service.upvote = upvote;
         return service;
 
         function getAll() {
             return $http.get('/api/play/all').then(handleSuccess, handleError);
+        }
+
+	function getBuffer(bufferName){
+            console.log(bufferName);
+            /*$http.get('/api/sheetMusic/'+bufferName).then(handleSuccess,handleError).then(function(song){
+                //console.log(song);
+                return song;
+            });*/
+            $http.get('/img/'+bufferName).then(handleSuccess,handleError);
+            //console.log(contra);
+            //return contra;
         }
 
         function upvote(record){

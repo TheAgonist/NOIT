@@ -13,20 +13,20 @@ router.get('/sheetMusic',getBuffer);
 module.exports = router;
 function getBuffer(req, res) {
     //var fstream;
-    var readStream = fs.createReadStream("public/img/"+req.params.bufferName);
+    var readStream = fs.createReadStream("img/"+req.params.bufferName);
     //console.log(readStream);
     // This will wait until; we know the readable stream is actually valid before piping
-    //readStream.on('open', function () {
+    readStream.on('open', function () {
     // This just pipes the read stream to the response object (which goes to the client)
     //console.log("----------------");
     //console.log(res);
-      //  readStream.pipe(response);
+        readStream.pipe(response);
 
-    //});
+    });
 
     // This catches any errors that happen while creating the readable stream (usually invalid names)
-    //readStream.on('error', function(err) {
-      //  console.log("error");
-        //res.end(err);
-    //});
+    readStream.on('error', function(err) {
+        console.log("error");
+        res.end(err);
+    });
 }

@@ -31,6 +31,9 @@
             var sixth = document.createElement("TD");
             var button = createPlayButton(record);
             sixth.appendChild(button);
+            var seven = document.createElement("TD");
+            var button = createSheetButton(record);
+            sixth.appendChild(button);
             var row = document.createElement("TR");
             row.id = "row";
             row.appendChild(first);
@@ -39,9 +42,22 @@
             row.appendChild(fourth);
             row.appendChild(fifth);
             row.appendChild(sixth);
+            row.appendChild(seven);
             var table = document.getElementById("listRecords");
             table.appendChild(row);
         }
+
+        function createSheetButton(record){
+            var sheet = document.createElement("BUTTON");
+            sheet.id = "sheetButton";
+            sheet.onclick = function() {
+                sheetFunc(record);
+                 };
+            sheet.innerHTML = "Show sheet music";
+            //console.log(record);
+            return sheet;
+        }
+
         function createUpvoteButton(record){
             var upvote = document.createElement("BUTTON");
             upvote.id = "upvoteButton";
@@ -78,6 +94,10 @@
 
         function upvoteFunc(record){
             PlayService.upvote(record);
+        }
+
+        function sheetFunc(record){
+            PlayService.getBuffer(record.name);
         }
     }
 })();

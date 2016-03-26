@@ -32,7 +32,7 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'play' }
             })
-            .state('sheetMusic', {
+            /*.state('sheetMusic', {
                 url: '/sheetMusic?bufferName',
                 templateUrl: 'sheetMusic/index.html',
                 controller: 'sheetMusic.IndexController',
@@ -48,7 +48,7 @@
                         }]
                 },
                 data: { activeTab: 'sheetMusic' }
-            })
+            })*/
             .state('upload', {
                 url: '/upload',
                 templateUrl: 'uploadFile/index.html',

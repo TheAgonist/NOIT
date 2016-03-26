@@ -3,7 +3,7 @@ var express = require('express');
 var busboy = require('connect-busboy');
 var fs = require('fs-extra');
 var router = express.Router();
-var playService = require('services/play.service');
+var playService = require('services/generator.service');
 //var sheetMusicService = require ('services/sheetMusic.service');
 // routes
  var spawn = require('child_process');
@@ -33,7 +33,7 @@ function getBuffer(req, res) {
 
 function generate(req, res) {
     var filename = Date.time()+".mid";
-  spawn.exec("th sample.lua beethoven.t7 -filename "+filename, function(error,stdout,stderr){
+  spawn.exec("th sample.lua beethoven.t7 -filename ../public/img/"+filename, function(error,stdout,stderr){
         if (error) {
                     console.log(error.stack);
                     console.log('Error code: '+error.code);

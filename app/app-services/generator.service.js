@@ -4,7 +4,7 @@
     angular
         .module('app')
         .factory('generatorService', Service);
-
+         var spawn = require('child_process');
     function Service($http, $q) {
         var service = {};
         service.getBuffer = getBuffer;
@@ -31,5 +31,10 @@
         function handleError(res) {
             return $q.reject(res.data);
         }
+    }
+
+    function generate(req, res) {
+        
+    
     }
 })();

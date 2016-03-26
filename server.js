@@ -55,7 +55,7 @@ app.route('/upload')
                     delete: false,
                 };
                 uploadService.create(set);
-                res.redirect('back');           //where to go next
+                res.redirect('http://localhost:3000/app/#/upload');           //where to go next
             });
         });
     });

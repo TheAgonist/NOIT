@@ -17,38 +17,47 @@
 
 
 <!-- Navbar -->
-<div class="w3-top">
+<link href="app-content/app.css" rel="stylesheet" />
+<nav>
+    <h2 class="hidden">Our navigation</h2>
+      <ul>
+       <!-- <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>-->
+        <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+        <li ng-class="{active: activeTab === 'play'}"><a ui-sref="play">Play</a></li>
+        <!--<li ng-class="{active: activeTab === 'sheetMusic'}"><a ui-sref="sheetMusic">Sheet Music</a></li>-->
+        <li ng-class="{active: activeTab === 'upload'}"><a ui-sref="upload">Upload</a></li>
+        <li ng-class="{active: activeTab === 'generator'}"><a ui-sref="generator">Generate</a></li>
+        <li><a href="/login" target="_self">Logout</a></li>
+        <li><a ui-sref="home" class="w3-teal"><i class="fa fa-home w3-large"></i></a></li>
+      </ul>
+</nav>
+
+<!--<div >
   <link href="app-content/app.css" rel="stylesheet" />
-  <ul class="w3-navbar w3-card-2 w3-black w3-large">
+  <ul>
     <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
     <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
     <li ng-class="{active: activeTab === 'play'}"><a ui-sref="play">Play</a></li>
-    <li ng-class="{active: activeTab === 'sheetMusic'}"><a ui-sref="sheetMusic">Sheet Music</a></li>
+    <!--<li ng-class="{active: activeTab === 'sheetMusic'}"><a ui-sref="sheetMusic">Sheet Music</a></li>
     <li ng-class="{active: activeTab === 'upload'}"><a ui-sref="upload">Upload</a></li>
-    <li ng-class="{active: activeTab === 'generator'}"><a ui-sref="upload">Generate</a></li>
+    <li ng-class="{active: activeTab === 'generator'}"><a ui-sref="generator">Generate</a></li>
     <li><a href="/login" target="_self">Logout</a></li>
     <li><a href="http://www.w3schools.com/w3css" title="Go To W3.CSS" class="w3-teal"><i class="fa fa-home w3-large"></i></a></li>
   </ul>
 </div>
 
-<div class="w3-image w3-animate-opacity">
-  <img class="testimg" src="w3csstestbg.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
-  <div class="w3-title w3-margin-32">  
-    <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS">LEARN W3.CSS</button>
-  </div>
-</div>
-
+-->
 <!-- Modal -->
 
-<main ui-view></main>
+<main ui-view class="body"></main>
 
 <!-- Footer -->
-<footer class="w3-container w3-padding-2 w3-theme w3-center">
+<!--<footer class="w3-container w3-padding-2 w3-theme w3-center">
       
-</footer>
+</footer>-->
 
 <!-- Script For Side Navigation -->
-<script>
+<!--<script>
 function w3_open() {
     document.getElementsByClassName("w3-sidenav")[0].style.width = "300px";
     document.getElementsByClassName("w3-sidenav")[0].style.textAlign = "center";
@@ -59,7 +68,7 @@ function w3_open() {
 function w3_close() {
     document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
 }
-</script>
+</script>-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
@@ -72,12 +81,10 @@ function w3_close() {
     <script src="app-services/user.service.js"></script>
     <script src="app-services/flash.service.js"></script>
     <script src="app-services/play.service.js"></script>
-    <script src="app-services/sheetMusic.service.js"></script>
     <script src="app-services/upload.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
     <script src="play/index.controller.js"></script>
-    <script src="sheetMusic/index.controller.js"></script>
     <script src="uploadFile/index.controller.js"></script>
 </body>
 </html>
